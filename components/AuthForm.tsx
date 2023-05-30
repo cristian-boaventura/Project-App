@@ -30,6 +30,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
   const [error, setError] = useState("");
 
   const router = useRouter();
+  
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
