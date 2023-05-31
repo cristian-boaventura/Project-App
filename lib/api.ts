@@ -1,7 +1,8 @@
 const fetcher = async ({ url, method, body, json = true }) => {
     const res = await fetch(url, {
       method,
-      body: body && JSON.stringify(body),
+      // the next line of code will ommit the body field if there's none
+      ...(body && {body: JSON.stringify(body)}),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -9,29 +10,27 @@ const fetcher = async ({ url, method, body, json = true }) => {
     });
   
     if (!res.ok) {
-      throw new Error("API Error");
+      throw new Error("API Error"); 
     }
   
     if (json) {
       const data = await res.json();
-      return data;
+      return data.data
     }
   };
   
-  export const register = async (user) => {
+export const register = async (user) => {
     return fetcher({
       url: "/api/register",
       method: "POST",
       body: user,
-      json: false,
     });
   };
   
-  export const signin = async (user) => {
+export const signin = async (user) => {
     return fetcher({
       url: "/api/signin",
       method: "POST",
       body: user,
-      json: false,
     });
   };

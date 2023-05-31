@@ -27,9 +27,9 @@ export default async function register(
       })
     );
     res.status(201);
-    res.end();
+    res.json({});
   } else {
     res.status(402);
-    res.end();
+    res.json({});
   }
 }
